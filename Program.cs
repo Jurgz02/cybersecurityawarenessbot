@@ -19,6 +19,8 @@ namespace cybersecurityawarenessbot
             new user_name() { };
             //create instance for logo_design
             new logo_design() { };
+            //create instance for user_interaction
+            new user_interaction() { };
         }
     }
 }
