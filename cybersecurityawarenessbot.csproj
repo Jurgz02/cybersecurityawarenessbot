@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CybersecurityBot.cs" />
+    <Compile Include="keyword_recognition.cs" />
     <Compile Include="logo_design.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

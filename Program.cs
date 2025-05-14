@@ -21,7 +21,8 @@ namespace cybersecurityawarenessbot
             new CybersecurityBot(){};
             CybersecurityBot bot = new CybersecurityBot();
             bot.Start();
-
+            //create instance for keyword_recognition
+            new keyword_recognition() { };
         }
     }
 }
