@@ -16,13 +16,10 @@ namespace cybersecurityawarenessbot
             try
             {
                 // Set up the path for storing memory - more reliable path handling
-                string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                string full_path = AppDomain.CurrentDomain.BaseDirectory;
                 // Go up one directory level to ensure we're not in bin/Debug
-                string parentDirectory = Directory.GetParent(baseDirectory)?.Parent?.FullName;
-
-                // If we couldn't get parent directory, fall back to base directory
-                string storageDirectory = parentDirectory ?? baseDirectory;
-                _memoryFilePath = Path.Combine(storageDirectory, "memory.txt");
+                string new_path = full_path.Replace("bin\\Debug\\", "");
+                _memoryFilePath = Path.Combine(new_path, "memory.txt");
 
                 Console.WriteLine($"Memory file will be stored at: {_memoryFilePath}");
 
