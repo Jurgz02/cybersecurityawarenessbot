@@ -48,9 +48,11 @@
     <Compile Include="CybersecurityBot.cs" />
     <Compile Include="keyword_recognition.cs" />
     <Compile Include="logo_design.cs" />
+    <Compile Include="memory_recall.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="random_responses.cs" />
+    <Compile Include="sentiment_detection.cs" />
     <Compile Include="voice_greeting.cs" />
     <Compile Include="welcome_message.cs" />
   </ItemGroup>

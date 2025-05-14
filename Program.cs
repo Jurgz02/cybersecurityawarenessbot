@@ -28,7 +28,10 @@ namespace cybersecurityawarenessbot
             new random_responses() { };
             //create instance for conversation_flow
             new conversation_flow() { };
-            //create instance fo
+            //create instance for memory_recall
+            new memory_recall() { };
+            //create instance for sentiment_detection
+            new sentiment_detection() { };
         }
     }
 }
