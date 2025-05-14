@@ -49,6 +49,7 @@
     <Compile Include="logo_design.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="random_responses.cs" />
     <Compile Include="voice_greeting.cs" />
     <Compile Include="welcome_message.cs" />
   </ItemGroup>

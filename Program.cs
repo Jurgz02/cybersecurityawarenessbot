@@ -23,6 +23,8 @@ namespace cybersecurityawarenessbot
             bot.Start();
             //create instance for keyword_recognition
             new keyword_recognition() { };
+            //create instance for random_responses
+            new random_responses() { };
         }
     }
 }
