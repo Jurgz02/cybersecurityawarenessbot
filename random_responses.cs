@@ -3,20 +3,17 @@ using System;
 
 namespace cybersecurityawarenessbot
 {
-    public class random_responses
+    public class Random_responses
     {
-
 
         // Dictionary to store multiple responses for each topic
         private Dictionary<string, List<string>> _topicResponses;
-        private Random random;
         private Random _random;
 
-        public random_responses()
+        public Random_responses()
         {
-            random = new Random();
-
-            // Initialize with multiple responses for each topic
+            _random = new Random(); // Initialize _random
+                                    // Initialize with multiple responses for each topic
             _topicResponses = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase)
             {
                 { "phishing", new List<string>
@@ -79,12 +76,17 @@ namespace cybersecurityawarenessbot
 
             // Get a random response for the topic
             List<string> responses = _topicResponses[topic];
+
+            // Check if responses list is empty to avoid null reference
+            if (responses.Count == 0)
+                return "No information available on this topic.";
+
             int randomIndex = _random.Next(0, responses.Count);
 
             // Add sentiment-based prefix if sentiment is detected
             if (!string.IsNullOrEmpty(sentiment))
             {
-                switch (sentiment)
+                switch (sentiment.ToLower())
                 {
                     case "worried":
                         return "I understand you're concerned. " + responses[randomIndex];

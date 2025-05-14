@@ -5,13 +5,13 @@ using System.Text.RegularExpressions;
 
 namespace cybersecurityawarenessbot
 {
-    public class keyword_recognition
+    public class Keyword_recognition
     {
         // Dictionary to store keywords and responses
         private Dictionary<string, string> _keywordResponses;
         private string _detectedKeyword = "";
 
-        public keyword_recognition()
+        public Keyword_recognition()
         {
             // Initialize dictionary with cybersecurity keywords and responses
             _keywordResponses = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
