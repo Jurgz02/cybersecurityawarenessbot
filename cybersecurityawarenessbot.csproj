@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="conversation_flow.cs" />
     <Compile Include="CybersecurityBot.cs" />
     <Compile Include="keyword_recognition.cs" />
     <Compile Include="logo_design.cs" />
