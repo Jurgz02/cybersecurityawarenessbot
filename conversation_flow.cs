@@ -65,7 +65,6 @@ namespace cybersecurityawarenessbot
 
             // Check if this is a follow-up question to the current topic
             string[] followUpIndicators = { "more", "tell me more", "explain", "elaborate", "details", "yes", "sure", "okay", "examples", "how" };
-
             return followUpIndicators.Any(indicator =>
                 Regex.IsMatch(input, $@"\b{Regex.Escape(indicator)}\b", RegexOptions.IgnoreCase));
         }
