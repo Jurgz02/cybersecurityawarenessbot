@@ -11,37 +11,65 @@ namespace cybersecurityawarenessbot
         private List<string> _conversationHistory = new List<string>();
         private string _memoryFilePath;
 
-
         public memory_recall()
         {
-            // Set up the path for storing memory
-            string full_path = AppDomain.CurrentDomain.BaseDirectory;
-            string new_path = full_path.Replace("bin\\Debug\\", "");
-            _memoryFilePath = Path.Combine(new_path, "memory.txt");
+            try
+            {
+                // Set up the path for storing memory - more reliable path handling
+                string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                // Go up one directory level to ensure we're not in bin/Debug
+                string parentDirectory = Directory.GetParent(baseDirectory)?.Parent?.FullName;
 
-            // Load any existing memory
-            LoadMemory();
+                // If we couldn't get parent directory, fall back to base directory
+                string storageDirectory = parentDirectory ?? baseDirectory;
+                _memoryFilePath = Path.Combine(storageDirectory, "memory.txt");
+
+                Console.WriteLine($"Memory file will be stored at: {_memoryFilePath}");
+
+                // Load any existing memory
+                LoadMemory();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error initializing memory system: {ex.Message}");
+                // Fallback to application directory if there was an error
+                _memoryFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "memory.txt");
+            }
         }
 
         public void StoreInput(string input)
         {
-            // Add to conversation history
-            _conversationHistory.Add($"User: {input}");
+            try
+            {
+                // Add to conversation history
+                _conversationHistory.Add($"User: {input}");
 
-            // Try to extract user information
-            ExtractUserInfo(input);
+                // Try to extract user information
+                ExtractUserInfo(input);
 
-            // Save the updated memory
-            SaveMemory();
+                // Save the updated memory
+                SaveMemory();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error storing input: {ex.Message}");
+            }
         }
 
         public void StoreResponse(string response)
         {
-            // Add bot responses to conversation history too
-            _conversationHistory.Add($"Bot: {response}");
+            try
+            {
+                // Add bot responses to conversation history too
+                _conversationHistory.Add($"Bot: {response}");
 
-            // Save after each update
-            SaveMemory();
+                // Save after each update
+                SaveMemory();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error storing response: {ex.Message}");
+            }
         }
 
         public bool HasUserInformation()
@@ -152,6 +180,12 @@ namespace cybersecurityawarenessbot
                             _conversationHistory.Add(line);
                         }
                     }
+
+                    Console.WriteLine($"Successfully loaded memory with {_userInformation.Count} user info items and {_conversationHistory.Count} conversation entries");
+                }
+                else
+                {
+                    Console.WriteLine("No existing memory file found. Starting with empty memory.");
                 }
             }
             catch (Exception ex)
@@ -166,6 +200,13 @@ namespace cybersecurityawarenessbot
         {
             try
             {
+                // Make sure the directory exists
+                string directory = Path.GetDirectoryName(_memoryFilePath);
+                if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
+
                 List<string> lines = new List<string>();
 
                 // Save user information section
@@ -185,6 +226,7 @@ namespace cybersecurityawarenessbot
                 }
 
                 File.WriteAllLines(_memoryFilePath, lines);
+                Console.WriteLine($"Memory saved successfully to {_memoryFilePath}");
             }
             catch (Exception ex)
             {
@@ -205,6 +247,7 @@ namespace cybersecurityawarenessbot
                 if (File.Exists(_memoryFilePath))
                 {
                     File.Delete(_memoryFilePath);
+                    Console.WriteLine("Memory file deleted successfully");
                 }
             }
             catch (Exception ex)
